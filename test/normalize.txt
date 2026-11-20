@@ -1,0 +1,21 @@
+The following propositions should be normalized.
+
+?- normalise_cnf(p <-> q, F).
+F = (¬p\/q)/\(¬q\/p).
+
+?- normalise_cnf(¬ (p /\ (q \/ ¬ r)), F).
+F = (¬p\/¬q)/\(¬p\/r).
+
+?- normalise_cnf((a -> b) -> c, F).
+F = (a\/c)/\(¬b\/c).
+
+On the other hand, the following non-well formed propositons should not be normalized.
+
+?- normalise_cnf(p + q, F).
+false.
+
+?- normalise_cnf(p /\ ¬ q \/ R, F).
+false.
+
+?- normalise_cnf(p /\ ¬ (q , r), F).
+false.

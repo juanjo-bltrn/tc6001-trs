@@ -1,0 +1,19 @@
+The following are expected outputs to test the formula2cnf rule on development.
+
+?- formula2cnf(p, L). % Atom
+L = [1-[p]].
+
+?- formula2cnf(p <-> q, L).  % Equivalence
+L = [1-[p, ¬q], 2-[q, ¬p]].
+
+?- formula2cnf(p \/ ¬ p, L). % Tautology: empty clause set
+L = [].
+
+?- formula2cnf(p /\ ¬ p, L). % Contradiction: two unit clauses
+L = [1-[p], 2-[¬p]].
+
+?- formula2cnf((p \/ p \/ q) /\ (q \/ p), L). % Duplicate literal and clause
+L = [1-[p, q]].
+
+?- formula2cnf((a -> b) -> c, L). % Several rewrite kinds
+L = [1-[a, c], 2-[c, ¬b]].

@@ -1,0 +1,23 @@
+The following statements should be true, as they are well formed propositons.
+
+?- propositionp(a).
+true.
+?- propositionp(¬ ¬ a).
+true.
+?- propositionp((¬ (p /\ q) -> r \/ ¬ s) <-> t).
+true.
+
+The following ones should be false.
+
+?- propositionp(p + q).        % + is not a connective
+false.
+?- propositionp(p /\ f(q)).    % f(q) is not a proposition
+false.
+?- propositionp((p, q)).       % comma is not a connective
+false.
+?- propositionp(p \/ 42).      % number, not an atom
+false.
+?- propositionp(¬(a, b)).      % ¬ used with two arguments
+false.
+?- propositionp(p /\ _).       % unbound variable (hangs without the var/1 guard)
+false.
