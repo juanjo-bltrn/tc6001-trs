@@ -63,6 +63,7 @@ test(contradiction):- check(p /\ ¬ p,        [1-[p], 2-[¬p]]).
 % Extra tests
 test(mixed)        :- check((a -> b) -> c,   [1-[a,c], 2-[c,¬b]]).
 test(duplicates)   :- check((p \/ p \/ q) /\ (q \/ p), [1-[p,q]]).
+test(nested_neg_impl) :- check(¬ ¬ ¬ (p -> ¬ q),            [1-[p], 2-[q]]).
 test(reject_term, [fail]) :- formula2cnf(p + q, _).
 test(reject_var,  [fail]) :- formula2cnf(p /\ _, _).
 
